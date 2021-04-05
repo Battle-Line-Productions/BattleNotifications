@@ -2,7 +2,7 @@
 {
     public class ForgotPasswordTemplates
     {
-        public const string Html = @"<!DOCTYPE html>
+        public string Html { get; } = @"<!DOCTYPE html>
         <html lang=""en"">
             <head>
                 <meta charset = ""UTF-8"" />
@@ -16,18 +16,21 @@
                 </h1>
                 <p style = ""text-align: center"" >
                            Thats okay! We can help you with that!
-                <a href = ""{{resetLink}}"" > Click Here</a> to complete your password reset.
+                <a href = ""{{ResetLink}}"" > Click Here</a> to complete your password reset.
             
                 </p>
                 <p style = ""text-align: center"" >
                            But what if you didn't request this? Please
-                    <a href = ""{{notRequestedLink}}"" > Click Here</a> to let us know something went
+                    <a href = ""{{NotRequestedLink}}"" > Click Here</a> to let us know something went
                 wrong!
                 </p>
             </body> 
         </html>";
 
-        public const string PlainText = @"Oh No! You've forgotten your Battleline password? \n Thats okay! We can help you with that! \n 
-Click Here to complete your password reset : {{resetLink}} \n But what if you didn't request this? Please Click here to let us known something went wrong: {{notRequestedLink}} ";
+        public string PlainText { get; } = @"Oh No! You've forgotten your Battleline password? \n Thats okay! We can help you with that! \n 
+Click Here to complete your password reset : {{ResetLink}} \n But what if you didn't request this? Please Click here to let us known something went wrong: {{NotRequestedLink}} ";
+
+        public string Subject { get; } = @"Battleline Password Recovery";
+
     }
 }

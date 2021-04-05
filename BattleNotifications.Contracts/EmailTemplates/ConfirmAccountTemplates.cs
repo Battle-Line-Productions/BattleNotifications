@@ -2,7 +2,7 @@
 {
     public class ConfirmAccountTemplates
     {
-        public const string Html = @"<!DOCTYPE html>
+        public string Html { get; } = @"<!DOCTYPE html>
         <html lang=""en"">
             <head>
                 <meta charset = ""UTF-8"" />
@@ -18,11 +18,14 @@
                            Now we can take the next steps of validating your account.Please use the
                 code below to validate your account:
                 </p>
-                <p style = ""text-align: center"" >{{code}}</p>
+                <p style = ""text-align: center"" >{{Code}}</p>
             </body>
         </html>";
 
-        public const string PlainText = @"YAY! You've Created an account with Us!\n Now we can take the next steps of validating your account.Please use the
-        code below to validate your account: {{code}}";
+        public string PlainText { get; } = @"YAY! You've Created an account with Us!\n Now we can take the next steps of validating your account.Please use the
+        code below to validate your account: {{Code}}";
+
+        public string Subject { get; } = @"Confirm your Battleline Account!";
+
     }
 }

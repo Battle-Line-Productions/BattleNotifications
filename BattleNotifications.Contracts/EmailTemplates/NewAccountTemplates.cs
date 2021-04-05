@@ -2,7 +2,7 @@
 {
     public class NewAccountTemplates
     {
-        public const string Html = @"<!DOCTYPE html>
+        public string Html { get; } = @"<!DOCTYPE html>
         <html lang=""en"">
             <head>
                 <meta charset = ""UTF-8"" />
@@ -29,7 +29,9 @@
             </body>
         </html>";
 
-        public const string PlainText = @"Welcome to your new Battleline Account! \n Now that you are registered you can use cool features of our site and
+        public string PlainText { get; } = @"Welcome to your new Battleline Account! \n Now that you are registered you can use cool features of our site and
             applications";
+
+        public string Subject { get; } = @"Welcome to your Battleline Account";
     }
 }

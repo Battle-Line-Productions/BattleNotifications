@@ -1,9 +1,12 @@
 ﻿namespace BattleNotifications.Service.Interfaces
 {
-    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using Contracts.Domain.V1;
 
     public interface ITemplatingService
     {
-        Task<(string, string)> BuildEmailBody<T>(string templateName, T parameters);
+        (string, string, string) BuildEmailSubjectAndBody(EmailTemplateChoices templateName, object parameters);
+
+        object BuildTemplateData(List<KeyValueTemplatePairs> pairs);
     }
 }

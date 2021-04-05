@@ -28,6 +28,8 @@
             services.AddSingleton(jwtSettings);
 
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<ITemplatingService, TemplatingService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services
                 .AddMvc(options =>

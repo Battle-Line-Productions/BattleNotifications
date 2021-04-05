@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SwaggerExamples\**" />
+    <Compile Remove="Validators\**" />
+    <Content Remove="SwaggerExamples\**" />
+    <Content Remove="Validators\**" />
+    <EmbeddedResource Remove="SwaggerExamples\**" />
+    <EmbeddedResource Remove="Validators\**" />
+    <None Remove="SwaggerExamples\**" />
+    <None Remove="Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="5.0.4" />
@@ -17,13 +28,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="SwaggerExamples\Responses\" />
-    <Folder Include="SwaggerExamples\Requests\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,7 +27,7 @@ jobs:
       with:
         files: 'BattleNotifications.Api/appsettings.Production.json'
       env:
-        ApiKey: ${{ secrets.BATTLE_AUTH_TEST_API_KEY }}
+        ApiKey: ${{ secrets.BATTLE_NOTIFICATION_TEST_API_KEY }}
         JwtSettings.Secret: ${{ secrets.BATTLE_AUTH_TEST_JWT_SECRET }}
         
     - name: Login to Amazon ECR

@@ -72,8 +72,9 @@ namespace BattleNotifications.Api
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
                 }
             });
-            app.UseAuthorization();
+            
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

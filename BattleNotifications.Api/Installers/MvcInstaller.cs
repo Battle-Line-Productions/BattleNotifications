@@ -1,5 +1,6 @@
 ﻿namespace BattleNotifications.Api.Installers
 {
+    using System.Security.Cryptography;
     using System.Text;
     using Contracts.Options;
     using Filters;
@@ -9,6 +10,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using Service.Extensions;
     using Service.Interfaces;
     using Service.Services;
 
@@ -27,9 +29,9 @@
             configuration.Bind(nameof(jwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
 
-            services.AddScoped<INotificationService, NotificationService>();
-            services.AddScoped<ITemplatingService, TemplatingService>();
-            services.AddScoped<IEmailService, EmailService>();
+            services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<ITemplatingService, TemplatingService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             services
                 .AddMvc(options =>
@@ -43,17 +45,23 @@
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
+            RSA rsa = RSA.Create();
+            rsa.ImportRSAPublicKey(jwtSettings.Public.ToByteArray(), out _);
+
             var tokenValidationParameters = new TokenValidationParameters
             {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                RequireExpirationTime = true,
-                ValidateLifetime = true
+                ValidIssuer = jwtSettings.Audience,
+                ValidAudience = jwtSettings.Audience,
+                IssuerSigningKey = new RsaSecurityKey(rsa),
+                CryptoProviderFactory = new CryptoProviderFactory()
+                {
+                    CacheSignatureProviders = false
+                }
             };
-
-            services.AddSingleton(tokenValidationParameters);
 
             services.AddAuthentication(x =>
             {

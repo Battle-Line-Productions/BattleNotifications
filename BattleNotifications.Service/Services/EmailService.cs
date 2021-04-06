@@ -1,6 +1,5 @@
 ﻿namespace BattleNotifications.Service.Services
 {
-    using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -11,13 +10,6 @@
 
     public class EmailService : IEmailService
     {
-        private readonly ILogger _logger;
-
-        public EmailService(ILogger logger)
-        {
-            _logger = logger;
-        }
-
         public async Task<bool> BuildAndSendEmail(string from, string to, string subject, string htmlBody, string textBody)
         {
             using var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.USEast2);
@@ -54,7 +46,6 @@
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex);
                 throw new Exception(ex.Message, ex);
             }
         }

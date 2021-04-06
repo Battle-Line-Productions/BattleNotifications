@@ -24,6 +24,11 @@
         {
             var data = new ExpandoObject();
 
+            if (pairs.Count == 0)
+            {
+                return data;
+            }
+
             foreach (var pair in pairs)
             {
                 data.TryAdd(pair.Key, pair.Value);

@@ -5,16 +5,10 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="SwaggerExamples\**" />
-    <Compile Remove="Validators\**" />
-    <Content Remove="SwaggerExamples\**" />
-    <Content Remove="Validators\**" />
-    <EmbeddedResource Remove="SwaggerExamples\**" />
-    <EmbeddedResource Remove="Validators\**" />
-    <None Remove="SwaggerExamples\**" />
-    <None Remove="Validators\**" />
-  </ItemGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.3" />
@@ -33,6 +27,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BattleNotifications.Contracts\BattleNotifications.Contracts.csproj" />
     <ProjectReference Include="..\BattleNotifications.Service\BattleNotifications.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SwaggerExamples\Requests\" />
   </ItemGroup>
 
 </Project>

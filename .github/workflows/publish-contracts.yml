@@ -21,9 +21,12 @@ jobs:
       with:
         source-url: https://api.nuget.org/v3/index.json3
         dotnet-version: '5.0'
-      run: dotnet build BattleNotifications.Contracts
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Build Project
+      run: |
+        dotnet build BattleNotifications.Contracts
 
     - name: Build solution and generate NuGet package
       run: |  

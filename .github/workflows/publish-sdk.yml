@@ -21,6 +21,8 @@ jobs:
       with:
         source-url: https://api.nuget.org/v3/index.json
         dotnet-version: '5.0'
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
 
     - name: Build solution and generate NuGet package
       run: |  

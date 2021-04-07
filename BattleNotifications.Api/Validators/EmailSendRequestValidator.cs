@@ -10,11 +10,11 @@
     {
         public EmailSendRequestValidator()
         {
-            List<EmailTemplateChoices> conditions = new List<EmailTemplateChoices>()
+            List<string> conditions = new List<string>()
              {
-                 EmailTemplateChoices.ForgotPassword,
-                 EmailTemplateChoices.ConfirmAccount,
-                 EmailTemplateChoices.NewAccount
+                 "ForgotPassword",
+                 "ConfirmAccount",
+                 "NewAccount"
              };
             RuleFor(x => x.From).NotEmpty().EmailAddress();
             RuleFor(x => x.To).NotEmpty().EmailAddress();

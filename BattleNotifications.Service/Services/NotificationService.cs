@@ -23,12 +23,27 @@
 
             var templateData = _templatingService.BuildTemplateData(request.TemplateData);
             var (subject, html, plainText) =
-                _templatingService.BuildEmailSubjectAndBody(request.TemplateChoice, templateData);
+                _templatingService.BuildEmailSubjectAndBody(DetermineTemplateToUse(request.TemplateChoice), templateData);
 
             var emailSent = await _emailService.BuildAndSendEmail(request.From, request.To, subject, html, plainText);
             emailSent.TrackingId = trackingId;
 
             return emailSent;
+        }
+
+        private EmailTemplateChoices DetermineTemplateToUse(string templateName)
+        {
+            switch (templateName)
+            {
+                case "ForgotPassword":
+                    return EmailTemplateChoices.ForgotPassword;
+                case "ConfirmAccount":
+                    return EmailTemplateChoices.ConfirmAccount;
+                case "NewAccount":
+                    return EmailTemplateChoices.NewAccount;
+                default:
+                    return EmailTemplateChoices.NewAccount;
+            }
         }
     }
 }

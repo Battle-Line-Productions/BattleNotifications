@@ -9,7 +9,7 @@
         
         public string From { get; set; }
 
-        public EmailTemplateChoices TemplateChoice { get; set; }
+        public string TemplateChoice { get; set; }
 
         public List<KeyValueTemplatePairs> TemplateData { get; set; }
     }

@@ -13,7 +13,7 @@
             {
                 To = "Email@email.com",
                 From = "noreply@battlelineproductions.com",
-                TemplateChoice = EmailTemplateChoices.ConfirmAccount,
+                TemplateChoice = "ConfirmAccount",
                 TemplateData = new List<KeyValueTemplatePairs>()
                 {
                     new KeyValueTemplatePairs()

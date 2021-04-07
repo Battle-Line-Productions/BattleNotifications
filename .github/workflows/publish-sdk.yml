@@ -26,7 +26,7 @@ jobs:
 
     - name: Build Project
       run: |
-        dotnet build BattleNotifications.Sdk
+        dotnet build BattleNotifications.Sdk --configuration Release
 
     - name: Build solution and generate NuGet package
       run: |  

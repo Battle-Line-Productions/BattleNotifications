@@ -8,6 +8,7 @@
     <Company>Battle Line Productions</Company>
     <Description>SDK for BattleCore Notification Service</Description>
     <Copyright>BattleLine Productions LLC 20221</Copyright>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

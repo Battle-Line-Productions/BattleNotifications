@@ -6,11 +6,12 @@
     using Amazon;
     using Amazon.SimpleEmail;
     using Amazon.SimpleEmail.Model;
+    using Contracts.Domain.V1;
     using Interfaces;
 
     public class EmailService : IEmailService
     {
-        public async Task<bool> BuildAndSendEmail(string from, string to, string subject, string htmlBody, string textBody)
+        public async Task<SendEmailResult> BuildAndSendEmail(string from, string to, string subject, string htmlBody, string textBody)
         {
             using var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.USEast2);
             var sendRequest = new SendEmailRequest()
@@ -41,12 +42,23 @@
 
             try
             {
-                await client.SendEmailAsync(sendRequest);
-                return true;
+                var emailSendResult = await client.SendEmailAsync(sendRequest);
+
+                return new SendEmailResult()
+                {
+                    SesMessageId = emailSendResult.MessageId,
+                    Message = "Email successfully sent",
+                    Success = true,
+                };
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                return new SendEmailResult()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    Errors = new []{ $"Stack Track: {ex.StackTrace}", $"InnerException: {ex.InnerException}", $"Source: {ex.Source}", $"Message: {ex.Message}" }
+                };
             }
         }
     }

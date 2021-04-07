@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>Michael Cavanaugh</Authors>
+    <Company>Battle Line Productions</Company>
+    <Description>SDK for BattleCore Notification Service</Description>
+    <Copyright>BattleLine Productions LLC 20221</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Refit" Version="6.0.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BattleNotifications.Contracts\BattleNotifications.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

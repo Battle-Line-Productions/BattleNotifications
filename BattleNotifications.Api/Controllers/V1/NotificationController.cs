@@ -4,6 +4,7 @@
     using Contracts.Contracts.V1;
     using Contracts.Contracts.V1.Requests;
     using Contracts.Contracts.V1.Responses;
+    using Contracts.Domain.V1;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -27,18 +28,35 @@
         /// <response code="400">Email not send by AWS Simple Email Service.</response>
         [HttpPost(ApiRoutes.Notification.SendEmail)]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ProducesResponseType(200)]
-        [ProducesErrorResponseType(typeof(ErrorResponse))]
+        [ProducesResponseType(typeof(Response<EmailSuccessfullySentResponse>), 200)]
+        [ProducesResponseType(typeof(Response<EmailFailureResponse>), 400)]
         public async Task<IActionResult> SendEmail([FromBody] EmailSendRequest request)
         {
             var emailSent = await _notificationService.BuildAndSendEmail(request);
 
-            if (!emailSent)
+            if (!emailSent.Success)
             {
-                return BadRequest();
+                return ApiResponse.GetActionResult(ResultStatus.Error400, new Response<EmailFailureResponse>()
+                {
+                    Data = new EmailFailureResponse()
+                    {
+                        Success = false,
+                        TrackingId = emailSent.TrackingId,
+                        Errors = emailSent.Errors
+                    }
+                });
             }
 
-            return Ok();
+            return ApiResponse.GetActionResult(ResultStatus.Ok200, new Response<EmailSuccessfullySentResponse>()
+            {
+                Data = new EmailSuccessfullySentResponse()
+                {
+                    Success = false,
+                    TrackingId = emailSent.TrackingId,
+                    Message = emailSent.Message,
+                    SeSMessageId = emailSent.SesMessageId
+                }
+            });
         }
     }
 }

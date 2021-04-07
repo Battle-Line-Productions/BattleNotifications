@@ -5,6 +5,7 @@
     using Contracts.Contracts.V1.Requests;
     using Contracts.Contracts.V1.Responses;
     using Contracts.Domain.V1;
+    using Filters;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@
         /// <response code="200">Email sent by AWS Simple Email Service.</response>
         /// <response code="400">Email not send by AWS Simple Email Service.</response>
         [HttpPost(ApiRoutes.Notification.SendEmail)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ApiKeyAuth]
         [ProducesResponseType(typeof(Response<EmailSuccessfullySentResponse>), 200)]
         [ProducesResponseType(typeof(Response<EmailFailureResponse>), 400)]
         public async Task<IActionResult> SendEmail([FromBody] EmailSendRequest request)

@@ -34,5 +34,5 @@ jobs:
         dotnet pack -c Release -o out  
 
     - name: Push generated package to NuGet registry
-      run: dotnet nuget push ./BattleNotifications.Sdk/out/*.nupkg -k ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols
+      run: dotnet nuget push ./BattleNotifications.Sdk/out/*.nupkg -k ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols true
     

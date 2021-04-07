@@ -19,7 +19,9 @@ jobs:
     - name: Setup .NET Core @ Latest
       uses: actions/setup-dotnet@v1
       with:
-        source-url: https://api.nuget.org/v3/index.json
+        source-url: https://api.nuget.org/v3/index.json3
+        dotnet-version: '5.0'
+      run: dotnet build BattleNotifications.Contracts
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 

@@ -24,6 +24,10 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
 
+    - name: Build Project
+      run: |
+        dotnet build BattleNotifications.Contracts --configuration Release
+
     - name: Build solution and generate NuGet package
       run: |  
         cd BattleNotifications.Contracts

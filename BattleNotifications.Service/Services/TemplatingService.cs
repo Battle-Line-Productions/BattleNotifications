@@ -10,7 +10,7 @@
 
     public class TemplatingService : ITemplatingService
     {
-        public (string, string, string) BuildEmailSubjectAndBody(EmailTemplateChoices templateName, object parameters)
+        public (string, string, string) BuildEmailSubjectAndBody(EmailTemplateChoices templateName, object parameters = null)
         {
             var (subject, html, plainText) = GetTemplate(templateName);
 
@@ -29,7 +29,7 @@
         {
             var data = new ExpandoObject();
 
-            if (pairs.Count == 0)
+            if (pairs == null ||  pairs.Count == 0)
             {
                 return data;
             }

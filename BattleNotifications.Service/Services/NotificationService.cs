@@ -21,14 +21,22 @@
         {
             var trackingId = Guid.NewGuid();
 
-            var templateData = _templatingService.BuildTemplateData(request.TemplateData);
-            var (subject, html, plainText) =
-                _templatingService.BuildEmailSubjectAndBody(DetermineTemplateToUse(request.TemplateChoice), templateData);
+            try
+            {
+                var templateData = _templatingService.BuildTemplateData(request.TemplateData);
+                var (subject, html, plainText) =
+                    _templatingService.BuildEmailSubjectAndBody(DetermineTemplateToUse(request.TemplateChoice), templateData);
 
-            var emailSent = await _emailService.BuildAndSendEmail(request.From, request.To, subject, html, plainText);
-            emailSent.TrackingId = trackingId;
+                var emailSent = await _emailService.BuildAndSendEmail(request.From, request.To, subject, html, plainText);
+                emailSent.TrackingId = trackingId;
 
-            return emailSent;
+                return emailSent;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message, ex);
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         private EmailTemplateChoices DetermineTemplateToUse(string templateName)

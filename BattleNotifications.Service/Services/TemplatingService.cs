@@ -14,6 +14,11 @@
         {
             var (subject, html, plainText) = GetTemplate(templateName);
 
+            if (parameters == null)
+            {
+                return (subject, html, plainText);
+            }
+
             var htmlString = BuildTemplate(html, parameters);
             var plainTextString = BuildTemplate(plainText, parameters);
 

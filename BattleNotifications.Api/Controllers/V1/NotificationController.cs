@@ -52,7 +52,7 @@
             {
                 Data = new EmailSuccessfullySentResponse()
                 {
-                    Success = false,
+                    Success = true,
                     TrackingId = emailSent.TrackingId,
                     Message = emailSent.Message,
                     SeSMessageId = emailSent.SesMessageId

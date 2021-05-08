@@ -20,8 +20,8 @@ provider:
 
 custom:
   imageMap:
-    test: 098170852411.dkr.ecr.us-east-2.amazonaws.com/listserviceapi:latest
-    prod: '098170852411.dkr.ecr.us-east-2.amazonaws.com/listserviceapi:latest'
+    test: 098170852411.dkr.ecr.us-east-2.amazonaws.com/battlenotifications-api-test:latest
+    prod: 098170852411.dkr.ecr.us-east-2.amazonaws.com/battlenotifications-api-prod:latest
   domainMap:
     test: notifications.api.test.battlelineproductions.com
     prod: notifications.api.battlelineproductions.com

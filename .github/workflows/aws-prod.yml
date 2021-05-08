@@ -1,7 +1,10 @@
-name: Deploy to Amazon ECS
+name: Deploy prod
 
 on:
   push:
+    branches: [ main ]
+  pull_request:
+    types: [closed]
     branches: [ main ]
 
 jobs:

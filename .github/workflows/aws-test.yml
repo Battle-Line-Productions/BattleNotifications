@@ -1,10 +1,8 @@
-name: Deploy to Amazon ECS
+name: Deploy test
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ test ]
 
 jobs:
   build:
@@ -38,7 +36,7 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: battlenotifications
+        ECR_REPOSITORY: battlenotifications-api-test
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and

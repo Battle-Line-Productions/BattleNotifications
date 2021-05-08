@@ -1,0 +1,19 @@
+{
+  "name": "battlenotifications",
+  "version": "1.0.0",
+  "scripts": {
+    "deploy": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Battle-Line-Productions/BattleNotifications.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Battle-Line-Productions/BattleNotifications/issues"
+  },
+  "homepage": "https://github.com/Battle-Line-Productions/BattleNotifications#readme",
+  "devDependencies": {
+    "serverless": "^2.40.0",
+    "serverless-domain-manager": "^5.1.0"
+  }
+}

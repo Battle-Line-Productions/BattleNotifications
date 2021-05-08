@@ -1,0 +1,55 @@
+service: BattleNotifications
+
+provider:
+  name: aws
+  runtime: dotnetcore5.0
+  region: us-east-2
+  profile: ${opt:profile, 'blptest'}
+  logRetentionInDays: 3
+  stage: ${opt:stage, 'test'}
+  lambdaHashingVersion: 20201221
+  apiGateway:
+    shouldStartNameWithService: true
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 'logs: *'
+          Resource: '*'
+
+custom:
+  imageMap:
+    test: 098170852411.dkr.ecr.us-east-2.amazonaws.com/listserviceapi:latest
+    prod: '098170852411.dkr.ecr.us-east-2.amazonaws.com/listserviceapi:latest'
+  domainMap:
+    test: notifications.api.test.battlelineproductions.com
+    prod: notifications.api.battlelineproductions.com
+  certMap:
+    test: '*.api.battlelineproductions.com'
+    prod: '*.api.test.battlelineproductions.com'
+  customDomain:
+    domainName: ${self:custom.domainMap.${self:provider.stage}}
+    certificateName: ${self:custom.certMap.${self:provider.stage}}
+    createRoute53Record: true
+    endpointType: regional
+    securityPolicy: tls_1_2
+    apiType: rest
+
+plugins:
+  - serverless-domain-manager
+
+package:
+  individually: true
+
+functions:
+  api:
+    name: ${self:service}-api-lambda-${self:provider.stage}
+    memorySize: 512
+    description: API lambda container for Battle Notifications Service
+    image: ${self:custom.imageMap.${self:provider.stage}}
+    events:
+    - http:
+        path: /{any+}
+        method: ANY
+        

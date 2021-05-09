@@ -28,8 +28,8 @@ WORKDIR /src
 COPY ["BattleNotifications.Api/BattleNotifications.Api.csproj", "BattleNotifications.Api/"]
 RUN dotnet restore "BattleNotifications.Api/BattleNotifications.Api.csproj"
 
-WORKDIR "/src/BattleNotifications.Api"
 COPY . .
+WORKDIR "/src/BattleNotifications.Api"
 RUN dotnet build "BattleNotifications.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

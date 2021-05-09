@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: dotnetcore5.0
   region: us-east-2
-  profile: ${opt:profile, 'blptest'}
+  profile: ${opt:profile, ''}
   logRetentionInDays: 3
   stage: ${opt:stage, 'test'}
   lambdaHashingVersion: 20201221
@@ -26,8 +26,8 @@ custom:
     test: notifications.api.test.battlelineproductions.com
     prod: notifications.api.battlelineproductions.com
   certMap:
-    test: '*.api.battlelineproductions.com'
-    prod: '*.api.test.battlelineproductions.com'
+    test: notifications.api.test.battlelineproductions.com
+    prod: notifications.api.battlelineproductions.com
   customDomain:
     domainName: ${self:custom.domainMap.${self:provider.stage}}
     certificateName: ${self:custom.certMap.${self:provider.stage}}
@@ -47,7 +47,10 @@ functions:
     name: ${self:service}-api-lambda-${self:provider.stage}
     memorySize: 512
     description: API lambda container for Battle Notifications Service
-    image: ${self:custom.imageMap.${self:provider.stage}}
+    image:
+      uri: ${self:custom.imageMap.${self:provider.stage}}
+      command: 
+        - BattleNotifications.Api::BattleNotifications.Api.LambdaEntryPoint::FunctionHandlerAsync
     events:
     - http:
         path: /{any+}

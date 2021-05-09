@@ -48,9 +48,8 @@ functions:
     memorySize: 512
     description: API lambda container for Battle Notifications Service
     image: ${self:custom.imageMap.${self:provider.stage}}
-    entryPoint: ./LambdaEntryPoint.cs
     command: 
-      - BattleNotifications.Api::BattleNotifications.Api.LambdaEntryPoint::FunctionHandlerAsync
+      - BattleNotifications.Api::BattleNotifications.Api.LambdaEntryPoint::Init
     events:
     - http:
         path: /{any+}

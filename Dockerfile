@@ -18,5 +18,5 @@ RUN dotnet publish "BattleNotifications.Api.csproj" -c Release --runtime linux-x
 FROM base AS final
 WORKDIR /var/task
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BattleNotifications.Api.dll"]
+# ENTRYPOINT ["dotnet", "BattleNotifications.Api.dll"]
 # CMD [ "LambdaEntryPoint.Init" ]
